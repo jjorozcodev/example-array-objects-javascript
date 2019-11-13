@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html>
-
+<title>Array's Manipulation with JS</title>
 <body>
 
     <h2>JavaScript Array of Objects</h2>
-
+    <hr />
+    <h3>Add objects...</h3>
     <input id="mark" placeholder="Mark" />
     <input id="wheels" placeholder="Wheels" type="number" />
     <input id="color" placeholder="Color" />
-    <br/>
+    <br />
     <button onclick="addCar()">Add Car!</button>
 
-    <hr/>
+    <hr />
+    <h3>Remove object...</h3>
+    <input id="markSearch" placeholder="Search by Mark" />
+    <button onclick="removeCar()">Remove Car!</button>
 
+    <hr />
     <h3>Result of Array...</h3>
 
     <p id="listArray"></p>
 
     <script>
         var carsList = [];
-        
+
         var markCar = document.getElementById("mark");
         var wheelsCar = document.getElementById("wheels");
         var colorCar = document.getElementById("color");
-
         document.getElementById("listArray").innerHTML = JSON.stringify(carsList);
-        
+
         markCar.focus();
-
         function addCar() {
-
             var minicar = { mark: markCar.value, wheels: wheelsCar.value, color: colorCar.value };
             carsList.push(minicar);
             document.getElementById("listArray").innerHTML = JSON.stringify(carsList);
-
             markCar.value = '';
             wheelsCar.value = '';
             colorCar.value = '';
             markCar.focus();
         }
 
-
+        function removeCar() {
+            var markCarSearch = document.getElementById('markSearch');
+            for (var i = 0; i < carsList.length; i++) {
+                if (carsList[i].mark == markCarSearch.value) {
+                    carsList.splice(i, 1);
+                }
+            }
+            markCarSearch.value = '';
+            document.getElementById("listArray").innerHTML = JSON.stringify(carsList);
+        }
     </script>
 
 </body>
